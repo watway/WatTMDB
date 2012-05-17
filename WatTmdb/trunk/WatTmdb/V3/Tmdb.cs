@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RestSharp.Deserializers;
+using System.Net;
 
 namespace WatTmdb.V3
 {
@@ -12,13 +13,23 @@ namespace WatTmdb.V3
 
         public string ApiKey { get; set; }
         public string Language { get; set; }
-        private JsonDeserializer jsonDeserializer = null;
+        private JsonDeserializer jsonDeserializer = new JsonDeserializer();
 
         public TmdbError Error { get; set; }
 
-        public Tmdb(string apiKey, string language = null)
+#if !WINDOWS_PHONE
+        public IWebProxy Proxy { get; set; }
+#endif
+
+        public Tmdb(string apiKey)
         {
-            jsonDeserializer = new JsonDeserializer();
+            Error = null;
+            ApiKey = apiKey;
+            Language = "en";
+        }
+
+        public Tmdb(string apiKey, string language)
+        {
             Error = null;
             ApiKey = apiKey;
             Language = language ?? "en";

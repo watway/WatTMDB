@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WatTmdb")]
+[assembly: AssemblyTitle("WatTmdb.WindowsPhone")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Watway")]
-[assembly: AssemblyProduct("WatTmdb")]
+[assembly: AssemblyProduct("WatTmdb.WindowsPhone")]
 [assembly: AssemblyCopyright("Copyright © Watway 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b410834-16c6-4953-b6ed-f04c9e9d20a7")]
+[assembly: Guid("a2b98419-d35f-4869-87d7-943cedf6dbb9")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,8 +30,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.2.0.0")]
 [assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]

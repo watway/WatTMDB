@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8BC39F17-3B8A-4516-98FA-0656E6F09EA9}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WatTmdb.WindowsPhone</RootNamespace>
+    <AssemblyName>WatTmdb.WindowsPhone</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>..\packages\RestSharp.103.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="mscorlib.extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\WatTmdb\Utility.cs">
+      <Link>Utility.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\Tmdb.Async.cs">
+      <Link>V3\Tmdb.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\Tmdb.cs">
+      <Link>V3\Tmdb.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbAsyncResult.cs">
+      <Link>V3\TmdbAsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbCollection.cs">
+      <Link>V3\TmdbCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbCompany.cs">
+      <Link>V3\TmdbCompany.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbCompanyMovies.cs">
+      <Link>V3\TmdbCompanyMovies.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbConfiguration.cs">
+      <Link>V3\TmdbConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbError.cs">
+      <Link>V3\TmdbError.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovie.cs">
+      <Link>V3\TmdbMovie.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieAlternateTitles.cs">
+      <Link>V3\TmdbMovieAlternateTitles.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieCast.cs">
+      <Link>V3\TmdbMovieCast.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieImages.cs">
+      <Link>V3\TmdbMovieImages.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieKeywords.cs">
+      <Link>V3\TmdbMovieKeywords.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieReleases.cs">
+      <Link>V3\TmdbMovieReleases.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieSearch.cs">
+      <Link>V3\TmdbMovieSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieTrailers.cs">
+      <Link>V3\TmdbMovieTrailers.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbNowPlaying.cs">
+      <Link>V3\TmdbNowPlaying.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPerson.cs">
+      <Link>V3\TmdbPerson.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPersonCredits.cs">
+      <Link>V3\TmdbPersonCredits.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPersonImages.cs">
+      <Link>V3\TmdbPersonImages.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPersonSearch.cs">
+      <Link>V3\TmdbPersonSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPopular.cs">
+      <Link>V3\TmdbPopular.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbSimilarMovies.cs">
+      <Link>V3\TmdbSimilarMovies.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTopRated.cs">
+      <Link>V3\TmdbTopRated.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

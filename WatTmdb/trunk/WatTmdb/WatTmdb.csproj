@@ -48,11 +48,15 @@
     <Compile Include="V3\Tmdb.Async.cs" />
     <Compile Include="V3\Tmdb.cs" />
     <Compile Include="V3\Tmdb.Sync.cs" />
+    <Compile Include="V3\TmdbAuthSession.cs" />
     <Compile Include="V3\TmdbCollection.cs" />
     <Compile Include="V3\TmdbCompany.cs" />
     <Compile Include="V3\TmdbCompanyMovies.cs" />
+    <Compile Include="V3\TmdbCompanySearch.cs" />
     <Compile Include="V3\TmdbConfiguration.cs" />
     <Compile Include="V3\TmdbError.cs" />
+    <Compile Include="V3\TmdbGenre.cs" />
+    <Compile Include="V3\TmdbGenreMovies.cs" />
     <Compile Include="V3\TmdbMovie.cs" />
     <Compile Include="V3\TmdbMovieAlternateTitles.cs" />
     <Compile Include="V3\TmdbMovieCast.cs" />
@@ -69,7 +73,10 @@
     <Compile Include="V3\TmdbPopular.cs" />
     <Compile Include="V3\TmdbAsyncResult.cs" />
     <Compile Include="V3\TmdbSimilarMovies.cs" />
+    <Compile Include="V3\TmdbAuthToken.cs" />
     <Compile Include="V3\TmdbTopRated.cs" />
+    <Compile Include="V3\TmdbTranslations.cs" />
+    <Compile Include="V3\TmdbUpcoming.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

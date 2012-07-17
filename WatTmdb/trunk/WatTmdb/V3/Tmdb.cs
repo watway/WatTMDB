@@ -17,22 +17,36 @@ namespace WatTmdb.V3
 
         public TmdbError Error { get; set; }
 
+        /// <summary>
+        /// String representation of response content
+        /// </summary>
+        public string ResponseContent { get; set; }
+
 #if !WINDOWS_PHONE
+        /// <summary>
+        /// Proxy to use for requests made.  Passed on to underying WebRequest if set.
+        /// </summary>
         public IWebProxy Proxy { get; set; }
 #endif
+        /// <summary>
+        /// Timeout in milliseconds to use for requests made.
+        /// </summary>
+        public int? Timeout { get; set; }
 
         public Tmdb(string apiKey)
         {
             Error = null;
             ApiKey = apiKey;
-            Language = "en";
+            Language = null;
+            Timeout = null;
         }
 
         public Tmdb(string apiKey, string language)
         {
             Error = null;
-            ApiKey = apiKey;
-            Language = language ?? "en";
+            ApiKey = ApiKey;
+            Language = language;
+            Timeout = null;
         }
     }
 }

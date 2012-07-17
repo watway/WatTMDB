@@ -73,11 +73,20 @@
     <Compile Include="..\WatTmdb\V3\TmdbCompanyMovies.cs">
       <Link>V3\TmdbCompanyMovies.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbCompanySearch.cs">
+      <Link>V3\TmdbCompanySearch.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbConfiguration.cs">
       <Link>V3\TmdbConfiguration.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbError.cs">
       <Link>V3\TmdbError.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbGenre.cs">
+      <Link>V3\TmdbGenre.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbGenreMovies.cs">
+      <Link>V3\TmdbGenreMovies.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovie.cs">
       <Link>V3\TmdbMovie.cs</Link>
@@ -126,6 +135,12 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbTopRated.cs">
       <Link>V3\TmdbTopRated.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTranslations.cs">
+      <Link>V3\TmdbTranslations.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbUpcoming.cs">
+      <Link>V3\TmdbUpcoming.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

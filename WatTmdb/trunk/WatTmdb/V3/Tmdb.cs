@@ -44,7 +44,7 @@ namespace WatTmdb.V3
         public Tmdb(string apiKey, string language)
         {
             Error = null;
-            ApiKey = ApiKey;
+            ApiKey = apiKey;
             Language = language;
             Timeout = null;
         }

@@ -13,6 +13,7 @@ namespace WatTmdb.V3
             where T : new()
         {
             var client = new RestClient(BASE_URL);
+            client.AddHandler("application/json", new WatJsonDeserializer());
             if (Timeout.HasValue)
                 client.Timeout = Timeout.Value;
 

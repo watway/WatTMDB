@@ -28,6 +28,8 @@ namespace WatTmdb.V3
 
             var resp = client.Execute<T>(request);
             ResponseContent = resp.Content;
+            ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+
             if (resp.ResponseStatus != ResponseStatus.Completed)
             {
                 if (resp.Content.Contains("status_message"))
@@ -41,6 +43,33 @@ namespace WatTmdb.V3
             return resp.Data;
         }
 
+        private string ProcessRequestETag(RestRequest request)
+        {
+            var client = new RestClient(BASE_URL);
+            if (Timeout.HasValue)
+                client.Timeout = Timeout.Value;
+
+#if !WINDOWS_PHONE
+            if (Proxy != null)
+                client.Proxy = Proxy;
+#endif
+            Error = null;
+
+            request.Method = Method.HEAD;
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("api_key", ApiKey);
+
+            var resp = client.Execute(request);
+            ResponseContent = resp.Content;
+            ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
+
+            if (resp.ResponseStatus != ResponseStatus.Completed && resp.ErrorException != null)
+                throw resp.ErrorException;
+
+            return this.ResponseETag;
+        }
+
+
         #region Configuration
         /// <summary>
         /// Retrieve configuration data from TMDB
@@ -49,10 +78,14 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbConfiguration GetConfiguration()
         {
-            var request = new RestRequest("configuration", Method.GET);
-
-            return ProcessRequest<TmdbConfiguration>(request);
+            return ProcessRequest<TmdbConfiguration>(BuildGetConfigurationRequest());
         }
+
+        public string GetConfigurationETag()
+        {
+            return ProcessRequestETag(BuildGetConfigurationRequest());
+        }
+
         #endregion
 
 
@@ -86,22 +119,9 @@ namespace WatTmdb.V3
         public TmdbMovieSearch SearchMovie(string query, int page, string language, bool? includeAdult = null, int? year = null)
         {
             if (string.IsNullOrEmpty(query))
-            {
-                Error = new TmdbError { status_message = "Search cannot be empty" };
-                return null;
-            }
+                throw new ArgumentException("Search must be supplied");
 
-            var request = new RestRequest("search/movie", Method.GET);
-            request.AddParameter("query", query.EscapeString());
-            request.AddParameter("page", page);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            if (includeAdult.HasValue)
-                request.AddParameter("include_adult", includeAdult.Value ? "true" : "false");
-            if (year.HasValue)
-                request.AddParameter("year", year.Value);
-
-            return ProcessRequest<TmdbMovieSearch>(request);
+            return ProcessRequest<TmdbMovieSearch>(BuildSearchMovieRequest(query, page, language, includeAdult, year));
         }
 
         /// <summary>
@@ -127,18 +147,9 @@ namespace WatTmdb.V3
         public TmdbPersonSearch SearchPerson(string query, int page, string language)
         {
             if (string.IsNullOrEmpty(query))
-            {
-                Error = new TmdbError { status_message = "Search cannot be empty" };
-                return null;
-            }
+                throw new ArgumentException("Search must be supplied");
 
-            var request = new RestRequest("search/person", Method.GET);
-            request.AddParameter("query", query.EscapeString());
-            request.AddParameter("page", page);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-
-            return ProcessRequest<TmdbPersonSearch>(request);
+            return ProcessRequest<TmdbPersonSearch>(BuildSearchPersonRequest(query, page, language));
         }
 
         /// <summary>
@@ -163,17 +174,11 @@ namespace WatTmdb.V3
         public TmdbCompanySearch SearchCompany(string query, int page)
         {
             if (string.IsNullOrEmpty(query))
-            {
-                Error = new TmdbError { status_message = "Search cannot be empty" };
-                return null;
-            }
+                throw new ArgumentException("Search must be supplied");
 
-            var request = new RestRequest("search/company", Method.GET);
-            request.AddParameter("query", query.EscapeString());
-            request.AddParameter("page", page);
-
-            return ProcessRequest<TmdbCompanySearch>(request);
+            return ProcessRequest<TmdbCompanySearch>(BuildSearchCompanyRequest(query, page));
         }
+
         #endregion
 
 
@@ -187,12 +192,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCollection GetCollectionInfo(int CollectionID, string language)
         {
-            var request = new RestRequest("collection/{id}", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", CollectionID.ToString());
+            return ProcessRequest<TmdbCollection>(BuildGetCollectionInfoRequest(CollectionID, language));
+        }
 
-            return ProcessRequest<TmdbCollection>(request);
+        public string GetCollectionInfoETag(int CollectionID, string language)
+        {
+            return ProcessRequestETag(BuildGetCollectionInfoRequest(CollectionID, language));
         }
 
         /// <summary>
@@ -204,6 +209,11 @@ namespace WatTmdb.V3
         public TmdbCollection GetCollectionInfo(int CollectionID)
         {
             return GetCollectionInfo(CollectionID, Language);
+        }
+
+        public string GetCollectionInfoETag(int CollectionID)
+        {
+            return GetCollectionInfoETag(CollectionID, Language);
         }
         #endregion
 
@@ -218,12 +228,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovie GetMovieInfo(int MovieID, string language)
         {
-            var request = new RestRequest("movie/{id}", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovie>(BuildGetMovieInfoRequest(MovieID, language));
+        }
 
-            return ProcessRequest<TmdbMovie>(request);
+        public string GetMovieInfoETag(int MovieID, string language)
+        {
+            return ProcessRequestETag(BuildGetMovieInfoRequest(MovieID, language));
         }
 
         /// <summary>
@@ -237,6 +247,11 @@ namespace WatTmdb.V3
             return GetMovieInfo(MovieID, Language);
         }
 
+        public string GetMovieInfoETag(int MovieID)
+        {
+            return GetMovieInfoETag(MovieID, Language);
+        }
+
         /// <summary>
         /// Retrieve all the basic movie information for a particular movie by IMDB reference.
         /// (http://help.themoviedb.org/kb/api/movie-info)
@@ -246,15 +261,9 @@ namespace WatTmdb.V3
         public TmdbMovie GetMovieByIMDB(string IMDB_ID)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
-            {
-                Error = new TmdbError { status_message = "IMDB_ID cannot be empty" };
-                return null;
-            }
+                throw new ArgumentException("IMDB_ID must be supplied");
 
-            var request = new RestRequest("movie/{id}", Method.GET);
-            request.AddUrlSegment("id", IMDB_ID.EscapeString());
-
-            return ProcessRequest<TmdbMovie>(request);
+            return ProcessRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID));
         }
 
         /// <summary>
@@ -266,12 +275,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieAlternateTitles GetMovieAlternateTitles(int MovieID, string Country)
         {
-            var request = new RestRequest("movie/{id}/alternative_titles", Method.GET);
-            if (string.IsNullOrEmpty(Country) == false)
-                request.AddParameter("country", Country);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieAlternateTitles>(BuildGetMovieAlternateTitlesRequest(MovieID, Country));
+        }
 
-            return ProcessRequest<TmdbMovieAlternateTitles>(request);
+        public string GetMovieAlternateTitlesETag(int MovieID, string Country)
+        {
+            return ProcessRequestETag(BuildGetMovieAlternateTitlesRequest(MovieID, Country));
         }
 
         /// <summary>
@@ -282,10 +291,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieCast GetMovieCast(int MovieID)
         {
-            var request = new RestRequest("movie/{id}/casts", Method.GET);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieCast>(BuildGetMovieCastRequest(MovieID));
+        }
 
-            return ProcessRequest<TmdbMovieCast>(request);
+        public string GetMovieCastETag(int MovieID)
+        {
+            return ProcessRequestETag(BuildGetMovieCastRequest(MovieID));
         }
 
         /// <summary>
@@ -297,12 +308,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieImages GetMovieImages(int MovieID, string language)
         {
-            var request = new RestRequest("movie/{id}/images", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieImages>(BuildGetMovieImagesRequest(MovieID, language));
+        }
 
-            return ProcessRequest<TmdbMovieImages>(request);
+        public string GetMovieImagesETag(int MovieID, string language)
+        {
+            return ProcessRequestETag(BuildGetMovieImagesRequest(MovieID, language));
         }
 
         /// <summary>
@@ -316,6 +327,11 @@ namespace WatTmdb.V3
             return GetMovieImages(MovieID, Language);
         }
 
+        public string GetMovieImagesETag(int MovieID)
+        {
+            return GetMovieImagesETag(MovieID, Language);
+        }
+
         /// <summary>
         /// Get list of all the keywords that have been added to a particular movie.  Only English keywords exist currently.
         /// (http://help.themoviedb.org/kb/api/movie-keywords)
@@ -324,10 +340,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieKeywords GetMovieKeywords(int MovieID)
         {
-            var request = new RestRequest("movie/{id}/keywords", Method.GET);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieKeywords>(BuildGetMovieKeywordsRequest(MovieID));
+        }
 
-            return ProcessRequest<TmdbMovieKeywords>(request);
+        public string GetMovieKeywordsETag(int MovieID)
+        {
+            return ProcessRequestETag(BuildGetMovieKeywordsRequest(MovieID));
         }
 
         /// <summary>
@@ -338,10 +356,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieReleases GetMovieReleases(int MovieID)
         {
-            var request = new RestRequest("movie/{id}/releases", Method.GET);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieReleases>(BuildGetMovieReleasesRequest(MovieID));
+        }
 
-            return ProcessRequest<TmdbMovieReleases>(request);
+        public string GetMovieReleasesETag(int MovieID)
+        {
+            return ProcessRequestETag(BuildGetMovieReleasesRequest(MovieID));
         }
 
         /// <summary>
@@ -353,12 +373,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbMovieTrailers GetMovieTrailers(int MovieID, string language)
         {
-            var request = new RestRequest("movie/{id}/trailers", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbMovieTrailers>(BuildGetMovieTrailersRequest(MovieID, language));
+        }
 
-            return ProcessRequest<TmdbMovieTrailers>(request);
+        public string GetMovieTrailersETag(int MovieID, string language)
+        {
+            return ProcessRequestETag(BuildGetMovieTrailersRequest(MovieID, language));
         }
 
         /// <summary>
@@ -372,6 +392,11 @@ namespace WatTmdb.V3
             return GetMovieTrailers(MovieID, Language);
         }
 
+        public string GetMovieTrailersETag(int MovieID)
+        {
+            return GetMovieTrailersETag(MovieID, Language);
+        }
+
         /// <summary>
         /// Get list of similar movies for a particular movie.
         /// (http://help.themoviedb.org/kb/api/movie-similar-movies)
@@ -382,13 +407,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbSimilarMovies GetSimilarMovies(int MovieID, int page, string language)
         {
-            var request = new RestRequest("movie/{id}/similar_movies", Method.GET);
-            request.AddParameter("page", page);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", MovieID.ToString());
-
-            return ProcessRequest<TmdbSimilarMovies>(request);
+            return ProcessRequest<TmdbSimilarMovies>(BuildGetSimilarMoviesRequest(MovieID, page, language));
         }
 
         /// <summary>
@@ -411,10 +430,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbTranslations GetMovieTranslations(int MovieID)
         {
-            var request = new RestRequest("movie/{id}/translations", Method.GET);
-            request.AddUrlSegment("id", MovieID.ToString());
+            return ProcessRequest<TmdbTranslations>(BuildGetMovieTranslationsRequest(MovieID));
+        }
 
-            return ProcessRequest<TmdbTranslations>(request);
+        public string GetMovieTranslationsETag(int MovieID)
+        {
+            return ProcessRequestETag(BuildGetMovieTranslationsRequest(MovieID));
         }
         #endregion
 
@@ -428,10 +449,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPerson GetPersonInfo(int PersonID)
         {
-            var request = new RestRequest("person/{id}", Method.GET);
-            request.AddUrlSegment("id", PersonID.ToString());
+            return ProcessRequest<TmdbPerson>(BuildGetPersonInfoRequest(PersonID));
+        }
 
-            return ProcessRequest<TmdbPerson>(request);
+        public string GetPersonInfoETag(int PersonID)
+        {
+            return ProcessRequestETag(BuildGetPersonInfoRequest(PersonID));
         }
 
         /// <summary>
@@ -443,12 +466,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonCredits GetPersonCredits(int PersonID, string language)
         {
-            var request = new RestRequest("person/{id}/credits", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddUrlSegment("id", PersonID.ToString());
+            return ProcessRequest<TmdbPersonCredits>(BuildGetPersonCreditsRequest(PersonID, language));
+        }
 
-            return ProcessRequest<TmdbPersonCredits>(request);
+        public string GetPersonCreditsETag(int PersonID, string language)
+        {
+            return ProcessRequestETag(BuildGetPersonCreditsRequest(PersonID, language));
         }
 
         /// <summary>
@@ -462,6 +485,11 @@ namespace WatTmdb.V3
             return GetPersonCredits(PersonID, Language);
         }
 
+        public string GetPersonCreditsETag(int PersonID)
+        {
+            return GetPersonCreditsETag(PersonID, Language);
+        }
+
         /// <summary>
         /// Get list of images for a person.
         /// (http://help.themoviedb.org/kb/api/person-images)
@@ -470,10 +498,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPersonImages GetPersonImages(int PersonID)
         {
-            var request = new RestRequest("person/{id}/images", Method.GET);
-            request.AddUrlSegment("id", PersonID.ToString());
+            return ProcessRequest<TmdbPersonImages>(BuildGetPersonImagesRequest(PersonID));
+        }
 
-            return ProcessRequest<TmdbPersonImages>(request);
+        public string GetPersonImagesETag(int PersonID)
+        {
+            return ProcessRequestETag(BuildGetPersonImagesRequest(PersonID));
         }
         #endregion
 
@@ -498,12 +528,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbNowPlaying GetNowPlayingMovies(int page, string language)
         {
-            var request = new RestRequest("movie/now-playing", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
-
-            return ProcessRequest<TmdbNowPlaying>(request);
+            return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -526,12 +551,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbPopular GetPopularMovies(int page, string language)
         {
-            var request = new RestRequest("movie/popular", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
-
-            return ProcessRequest<TmdbPopular>(request);
+            return ProcessRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -554,12 +574,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbTopRated GetTopRatedMovies(int page, string language)
         {
-            var request = new RestRequest("movie/top-rated", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
-
-            return ProcessRequest<TmdbTopRated>(request);
+            return ProcessRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -582,12 +597,7 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbUpcoming GetUpcomingMovies(int page, string language)
         {
-            var request = new RestRequest("movie/upcoming", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
-
-            return ProcessRequest<TmdbUpcoming>(request);
+            return ProcessRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language));
         }
 
         /// <summary>
@@ -612,10 +622,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCompany GetCompanyInfo(int CompanyID)
         {
-            var request = new RestRequest("company/{id}", Method.GET);
-            request.AddUrlSegment("id", CompanyID.ToString());
+            return ProcessRequest<TmdbCompany>(BuildGetCompanyInfoRequest(CompanyID));
+        }
 
-            return ProcessRequest<TmdbCompany>(request);
+        public string GetCompanyInfoETag(int CompanyID)
+        {
+            return ProcessRequestETag(BuildGetCompanyInfoRequest(CompanyID));
         }
 
         /// <summary>
@@ -628,13 +640,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbCompanyMovies GetCompanyMovies(int CompanyID, int page, string language)
         {
-            var request = new RestRequest("company/{id}/movies", Method.GET);
-            request.AddUrlSegment("id", CompanyID.ToString());
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
+            return ProcessRequest<TmdbCompanyMovies>(BuildGetCompanyMoviesRequest(CompanyID, page, language));
+        }
 
-            return ProcessRequest<TmdbCompanyMovies>(request);
+        public string GetCompanyMoviesETag(int CompanyID, int page, string language)
+        {
+            return ProcessRequestETag(BuildGetCompanyMoviesRequest(CompanyID, page, language));
         }
 
         /// <summary>
@@ -648,6 +659,11 @@ namespace WatTmdb.V3
         {
             return GetCompanyMovies(CompanyID, page, Language);
         }
+
+        public string GetCompanyMoviesETag(int CompanyID, int page)
+        {
+            return GetCompanyMoviesETag(CompanyID, page, Language);
+        }
         #endregion
 
 
@@ -660,11 +676,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbGenre GetGenreList(string language)
         {
-            var request = new RestRequest("genre/list", Method.GET);
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
+            return ProcessRequest<TmdbGenre>(BuildGetGenreListRequest(language));
+        }
 
-            return ProcessRequest<TmdbGenre>(request);
+        public string GetGenreListETag(string language)
+        {
+            return ProcessRequestETag(BuildGetGenreListRequest(language));
         }
 
         /// <summary>
@@ -677,6 +694,11 @@ namespace WatTmdb.V3
             return GetGenreList(Language);
         }
 
+        public string GetGenreListETag()
+        {
+            return GetGenreListETag(Language);
+        }
+
         /// <summary>
         /// Get list of movies in a Genre.  Note that only movies with more than 10 votes get listed.
         /// (http://help.themoviedb.org/kb/api/genre-movies)
@@ -687,13 +709,12 @@ namespace WatTmdb.V3
         /// <returns></returns>
         public TmdbGenreMovies GetGenreMovies(int GenreID, int page, string language)
         {
-            var request = new RestRequest("genre/{id}/movies", Method.GET);
-            request.AddUrlSegment("id", GenreID.ToString());
-            if (string.IsNullOrEmpty(language) == false)
-                request.AddParameter("language", language);
-            request.AddParameter("page", page);
+            return ProcessRequest<TmdbGenreMovies>(BuildGetGenreMoviesRequest(GenreID, page, language));
+        }
 
-            return ProcessRequest<TmdbGenreMovies>(request);
+        public string GetGenreMoviesETag(int GenreID, int page, string language)
+        {
+            return ProcessRequestETag(BuildGetGenreMoviesRequest(GenreID, page, language));
         }
 
         /// <summary>
@@ -706,6 +727,11 @@ namespace WatTmdb.V3
         public TmdbGenreMovies GetGenreMovies(int GenreID, int page)
         {
             return GetGenreMovies(GenreID, page, Language);
+        }
+
+        public string GetGenreMoviesETag(int GenreID, int page)
+        {
+            return GetGenreMoviesETag(GenreID, page, Language);
         }
         #endregion
     }

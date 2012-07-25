@@ -13,6 +13,8 @@ namespace WatTmdb.V3
             where T : new()
         {
             var client = new RestClient(BASE_URL);
+            client.AddHandler("application/json", new WatJsonDeserializer());
+
             if (Timeout.HasValue)
                 client.Timeout = Timeout.Value;
 
@@ -27,10 +29,13 @@ namespace WatTmdb.V3
             request.AddParameter("api_key", ApiKey);
 
             var resp = client.Execute<T>(request);
+
             ResponseContent = resp.Content;
             ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
-            if (resp.ResponseStatus != ResponseStatus.Completed)
+            if (resp.ResponseStatus == ResponseStatus.Completed)
+                return resp.Data;
+            else
             {
                 if (resp.Content.Contains("status_message"))
                     Error = jsonDeserializer.Deserialize<TmdbError>(resp);
@@ -40,7 +45,7 @@ namespace WatTmdb.V3
                     Error = new TmdbError { status_message = resp.ErrorMessage };
             }
 
-            return resp.Data;
+            return default(T);
         }
 
         private string ProcessRequestETag(RestRequest request)

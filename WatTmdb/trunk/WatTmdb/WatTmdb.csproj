@@ -50,6 +50,7 @@
     <Compile Include="V3\Tmdb.Sync.cs" />
     <Compile Include="V3\TmdbAuthSession.cs" />
     <Compile Include="V3\TmdbCollection.cs" />
+    <Compile Include="V3\TmdbCollectionImages.cs" />
     <Compile Include="V3\TmdbCompany.cs" />
     <Compile Include="V3\TmdbCompanyMovies.cs" />
     <Compile Include="V3\TmdbCompanySearch.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="V3\TmdbError.cs" />
     <Compile Include="V3\TmdbGenre.cs" />
     <Compile Include="V3\TmdbGenreMovies.cs" />
+    <Compile Include="V3\TmdbLatestMovie.cs" />
     <Compile Include="V3\TmdbMovie.cs" />
     <Compile Include="V3\TmdbMovieAlternateTitles.cs" />
     <Compile Include="V3\TmdbMovieCast.cs" />

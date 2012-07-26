@@ -220,6 +220,39 @@ namespace WatTmdb.V3
         {
             return GetCollectionInfoETag(CollectionID, Language);
         }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="language">optional - ISO 639-1 language code</param>
+        /// <returns></returns>
+        public TmdbCollectionImages GetCollectionImages(int CollectionID, string language)
+        {
+            return ProcessRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language));
+        }
+
+        public string GetCollectionImagesETag(int CollectionID, string language)
+        {
+            return ProcessRequestETag(BuildGetCollectionImagesRequest(CollectionID, language));
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <returns></returns>
+        public TmdbCollectionImages GetCollectionImages(int CollectionID)
+        {
+            return GetCollectionImages(CollectionID, Language);
+        }
+
+        public string GetCollectionImagesETag(int CollectionID)
+        {
+            return GetCollectionImagesETag(CollectionID, Language);
+        }
         #endregion
 
 
@@ -519,10 +552,10 @@ namespace WatTmdb.V3
         /// (http://help.themoviedb.org/kb/api/latest-movie)
         /// </summary>
         /// <returns></returns>
-        //public TmdbLatestMovie GetLatestMovie()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public TmdbLatestMovie GetLatestMovie()
+        {
+            return ProcessRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest());
+        }
 
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.

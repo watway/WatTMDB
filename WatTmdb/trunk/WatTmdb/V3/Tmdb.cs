@@ -143,6 +143,18 @@ namespace WatTmdb.V3
             
             return request;
         }
+
+        private static RestRequest BuildGetCollectionImagesRequest(int CollectionID, string language, object userState = null)
+        {
+            var request = new RestRequest("collection/{id}/images", Method.GET);
+            if (string.IsNullOrEmpty(language) == false)
+                request.AddParameter("language", language);
+            request.AddUrlSegment("id", CollectionID.ToString());
+            if (userState != null)
+                request.UserState = userState;
+
+            return request;
+        }
         #endregion
 
 
@@ -296,9 +308,18 @@ namespace WatTmdb.V3
 
 
         #region Miscellaneous Movie
+        private static RestRequest BuildGetLatestMovieRequest(object userState = null)
+        {
+            var request = new RestRequest("movie/latest", Method.GET);
+            if (userState != null)
+                request.UserState = userState;
+
+            return request;
+        }
+
         private static RestRequest BuildGetNowPlayingMoviesRequest(int page, string language, object userState = null)
         {
-            var request = new RestRequest("movie/now-playing", Method.GET);
+            var request = new RestRequest("movie/now_playing", Method.GET);
             if (string.IsNullOrEmpty(language) == false)
                 request.AddParameter("language", language);
             request.AddParameter("page", page);
@@ -322,7 +343,7 @@ namespace WatTmdb.V3
 
         private static RestRequest BuildGetTopRatedMoviesRequest(int page, string language, object userState = null)
         {
-            var request = new RestRequest("movie/top-rated", Method.GET);
+            var request = new RestRequest("movie/top_rated", Method.GET);
             if (string.IsNullOrEmpty(language) == false)
                 request.AddParameter("language", language);
             request.AddParameter("page", page);

@@ -67,6 +67,9 @@
     <Compile Include="..\WatTmdb\V3\TmdbCollection.cs">
       <Link>V3\TmdbCollection.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbCollectionImages.cs">
+      <Link>V3\TmdbCollectionImages.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbCompany.cs">
       <Link>V3\TmdbCompany.cs</Link>
     </Compile>
@@ -87,6 +90,9 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbGenreMovies.cs">
       <Link>V3\TmdbGenreMovies.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbLatestMovie.cs">
+      <Link>V3\TmdbLatestMovie.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovie.cs">
       <Link>V3\TmdbMovie.cs</Link>
@@ -141,6 +147,9 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbUpcoming.cs">
       <Link>V3\TmdbUpcoming.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\WatJsonDeserializer.cs">
+      <Link>V3\WatJsonDeserializer.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

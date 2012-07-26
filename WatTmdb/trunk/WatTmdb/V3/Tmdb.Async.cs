@@ -248,6 +248,41 @@ namespace WatTmdb.V3
         {
             GetCollectionInfoETag(CollectionID, Language, UserState, callback);
         }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="language">optional - ISO 639-1 language code</param>
+        /// <param name="UserState">User object to include in callback</param>
+        /// <param name="callback"></param>
+        public void GetCollectionImages(int CollectionID, string language, object UserState, Action<TmdbAsyncResult<TmdbCollectionImages>> callback)
+        {
+            ProcessAsyncRequest<TmdbCollectionImages>(BuildGetCollectionImagesRequest(CollectionID, language, UserState), callback);
+        }
+
+        public void GetCollectionImagesETag(int CollectionID, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetCollectionImagesRequest(CollectionID, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get all the images for a movie collection
+        /// http://help.themoviedb.org/kb/api/collection-images
+        /// </summary>
+        /// <param name="CollectionID">Collection ID, available in TmdbMovie::belongs_to_collection</param>
+        /// <param name="UserState">User object to include in callback</param>
+        /// <param name="callback"></param>
+        public void GetCollectionImages(int CollectionID, object UserState, Action<TmdbAsyncResult<TmdbCollectionImages>> callback)
+        {
+            GetCollectionImages(CollectionID, Language, UserState, callback);
+        }
+
+        public void GetCollectionImagesETag(int CollectionID, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetCollectionImagesETag(CollectionID, Language, UserState, callback);
+        }
         #endregion
 
 
@@ -601,10 +636,10 @@ namespace WatTmdb.V3
         /// <param name="UserState">User object to include in callback</param>
         /// <param name="callback"></param>
         /// <returns></returns>
-        //public void GetLatestMovie(object UserState, Action<TmdbAsyncResult<TmdbLatestMovie>> callback)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void GetLatestMovie(object UserState, Action<TmdbAsyncResult<TmdbLatestMovie>> callback)
+        {
+            ProcessAsyncRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(UserState), callback);
+        }
 
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.

@@ -29,5 +29,10 @@ namespace WatTmdb.V3
         public string title { get; set; }
         public double vote_average { get; set; }
         public int vote_count { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 }

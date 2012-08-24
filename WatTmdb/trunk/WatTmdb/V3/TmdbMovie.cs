@@ -17,24 +17,44 @@ namespace WatTmdb.V3
     {
         public int id { get; set; }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class ProductionCompany
     {
         public string name { get; set; }
         public int id { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class ProductionCountry
     {
         public string iso_3166_1 { get; set; }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class SpokenLanguage
     {
         public string iso_639_1 { get; set; }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class TmdbMovie
@@ -61,5 +81,10 @@ namespace WatTmdb.V3
         public string title { get; set; }
         public double vote_average { get; set; }
         public int vote_count { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 }

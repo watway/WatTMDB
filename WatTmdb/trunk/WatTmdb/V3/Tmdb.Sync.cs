@@ -34,7 +34,12 @@ namespace WatTmdb.V3
             ResponseHeaders = resp.Headers.ToDictionary(k => k.Name, v => v.Value);
 
             if (resp.ResponseStatus == ResponseStatus.Completed)
+            {
+                if (resp.Content.Contains("status_message"))
+                    Error = jsonDeserializer.Deserialize<TmdbError>(resp);
+
                 return resp.Data;
+            }
             else
             {
                 if (resp.Content.Contains("status_message"))
@@ -557,6 +562,11 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest());
         }
 
+        public string GetLatestMovieETag()
+        {
+            return ProcessRequestETag(BuildGetLatestMovieRequest());
+        }
+
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/now-playing-movies)
@@ -569,6 +579,11 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language));
         }
 
+        public string GetNowPlayingMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetNowPlayingMoviesRequest(page, language));
+        }
+
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/now-playing-movies)
@@ -578,6 +593,11 @@ namespace WatTmdb.V3
         public TmdbNowPlaying GetNowPlayingMovies(int page)
         {
             return GetNowPlayingMovies(page, Language);
+        }
+
+        public string GetNowPlayingMoviesETag(int page)
+        {
+            return GetNowPlayingMoviesETag(page, Language);
         }
 
         /// <summary>
@@ -592,6 +612,11 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language));
         }
 
+        public string GetPopularMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetPopularMoviesRequest(page, language));
+        }
+
         /// <summary>
         /// Get the daily popularity list of movies.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/popular-movie-list)
@@ -601,6 +626,11 @@ namespace WatTmdb.V3
         public TmdbPopular GetPopularMovies(int page)
         {
             return GetPopularMovies(page, Language);
+        }
+
+        public string GetPopularMoviesETag(int page)
+        {
+            return GetPopularMoviesETag(page, Language);
         }
 
         /// <summary>
@@ -615,6 +645,11 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language));
         }
 
+        public string GetTopRatedMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetTopRatedMoviesRequest(page, language));
+        }
+
         /// <summary>
         /// Get list of movies that have over 10 votes on TMDB.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/top-rated-movies)
@@ -624,6 +659,11 @@ namespace WatTmdb.V3
         public TmdbTopRated GetTopRatedMovies(int page)
         {
             return GetTopRatedMovies(page, Language);
+        }
+
+        public string GetTopRatedMoviesETag(int page)
+        {
+            return GetTopRatedMoviesETag(page, Language);
         }
 
         /// <summary>
@@ -638,6 +678,11 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbUpcoming>(BuildGetUpcomingMoviesRequest(page, language));
         }
 
+        public string GetUpcomingMoviesETag(int page, string language)
+        {
+            return ProcessRequestETag(BuildGetUpcomingMoviesRequest(page, language));
+        }
+
         /// <summary>
         /// Get list of movies that are arriving to theatres in the next few weeks.
         /// (http://help.themoviedb.org/kb/api/upcoming-movies)
@@ -647,6 +692,11 @@ namespace WatTmdb.V3
         public TmdbUpcoming GetUpcomingMovies(int page)
         {
             return GetUpcomingMovies(page, Language);
+        }
+
+        public string GetUpcomingMoviesETag(int page)
+        {
+            return GetUpcomingMoviesETag(page, Language);
         }
         #endregion
 

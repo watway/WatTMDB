@@ -10,6 +10,11 @@ namespace WatTmdb.V3
         public string name { get; set; }
         public int id { get; set; }
         public string logo_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class TmdbCompany
@@ -21,5 +26,10 @@ namespace WatTmdb.V3
         public string logo_path { get; set; }
         public string name { get; set; }
         public ParentCompany parent_company { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

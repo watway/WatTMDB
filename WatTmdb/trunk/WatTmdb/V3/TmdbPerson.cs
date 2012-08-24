@@ -17,5 +17,10 @@ namespace WatTmdb.V3
         public string name { get; set; }
         public string place_of_birth { get; set; }
         public string profile_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

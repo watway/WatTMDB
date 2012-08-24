@@ -13,6 +13,11 @@ namespace WatTmdb.V3
         public string original_title { get; set; }
         public string poster_path { get; set; }
         public string release_date { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 
     public class CrewCredit
@@ -24,6 +29,11 @@ namespace WatTmdb.V3
         public string job { get; set; }
         public string poster_path { get; set; }
         public string release_date { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 
     public class TmdbPersonCredits

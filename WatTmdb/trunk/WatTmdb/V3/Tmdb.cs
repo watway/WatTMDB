@@ -16,6 +16,11 @@ namespace WatTmdb.V3
         public string Language { get; set; }
         private JsonDeserializer jsonDeserializer = new JsonDeserializer();
 
+        /// <summary>
+        /// Current count of outstanding Async calls awaiting callback response
+        /// </summary>
+        public int AsyncCount = 0;
+
         public TmdbError Error { get; set; }
 
         /// <summary>

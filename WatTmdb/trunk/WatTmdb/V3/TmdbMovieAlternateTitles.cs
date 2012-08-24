@@ -9,6 +9,11 @@ namespace WatTmdb.V3
     {
         public string iso_3166_1 { get; set; }
         public string title { get; set; }
+
+        public override string ToString()
+        {
+            return title;
+        }
     }
 
     public class TmdbMovieAlternateTitles

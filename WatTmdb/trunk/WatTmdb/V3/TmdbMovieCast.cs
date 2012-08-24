@@ -12,6 +12,11 @@ namespace WatTmdb.V3
         public string character { get; set; }
         public int order { get; set; }
         public string profile_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class Crew
@@ -21,6 +26,11 @@ namespace WatTmdb.V3
         public string department { get; set; }
         public string job { get; set; }
         public string profile_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class TmdbMovieCast

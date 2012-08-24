@@ -27,8 +27,10 @@ namespace WatTmdb.V3
             request.AddHeader("Accept", "application/json");
             request.AddParameter("api_key", ApiKey);
 
+            ++AsyncCount;
             var asyncHandle = client.ExecuteAsync<T>(request, resp =>
                 {
+                    --AsyncCount;
                     var result = new TmdbAsyncResult<T>
                     {
                         Data = resp.Data,
@@ -641,6 +643,11 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbLatestMovie>(BuildGetLatestMovieRequest(UserState), callback);
         }
 
+        public void GetLatestMovieETag(object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetLatestMovieRequest(UserState), callback);
+        }
+
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/now-playing-movies)
@@ -654,6 +661,11 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbNowPlaying>(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
         }
 
+        public void GetNowPlayingMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetNowPlayingMoviesRequest(page, language, UserState), callback);
+        }
+
         /// <summary>
         /// Get the list of movies currently in theatres.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/now-playing-movies)
@@ -664,6 +676,11 @@ namespace WatTmdb.V3
         public void GetNowPlayingMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbNowPlaying>> callback)
         {
             GetNowPlayingMovies(page, Language, UserState, callback);
+        }
+
+        public void GetNowPlayingMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetNowPlayingMoviesETag(page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -679,6 +696,11 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbPopular>(BuildGetPopularMoviesRequest(page, language, UserState), callback);
         }
 
+        public void GetPopularMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetPopularMoviesRequest(page, language, UserState), callback);
+        }
+
         /// <summary>
         /// Get the daily popularity list of movies.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/popular-movie-list)
@@ -689,6 +711,11 @@ namespace WatTmdb.V3
         public void GetPopularMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbPopular>> callback)
         {
             GetPopularMovies(page, Language, UserState, callback);
+        }
+
+        public void GetPopularMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetPopularMoviesETag(page, Language, UserState, callback);
         }
 
         /// <summary>
@@ -704,6 +731,11 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbTopRated>(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
         }
 
+        public void GetTopRatedMoviesETag(int page, string language, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            ProcessAsyncRequestETag(BuildGetTopRatedMoviesRequest(page, language, UserState), callback);
+        }
+
         /// <summary>
         /// Get list of movies that have over 10 votes on TMDB.  Response will contain 20 movies per page.
         /// (http://help.themoviedb.org/kb/api/top-rated-movies)
@@ -714,6 +746,11 @@ namespace WatTmdb.V3
         public void GetTopRatedMovies(int page, object UserState, Action<TmdbAsyncResult<TmdbTopRated>> callback)
         {
             GetTopRatedMovies(page, Language, UserState, callback);
+        }
+
+        public void GetTopRatedMoviesETag(int page, object UserState, Action<TmdbAsyncETagResult> callback)
+        {
+            GetTopRatedMoviesETag(page, Language, UserState, callback);
         }
         #endregion
 

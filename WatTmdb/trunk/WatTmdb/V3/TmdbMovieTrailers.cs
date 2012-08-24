@@ -10,6 +10,11 @@ namespace WatTmdb.V3
         public string name { get; set; }
         public string size { get; set; }
         public string source { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public class TmdbMovieTrailers

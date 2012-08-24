@@ -25,6 +25,11 @@ namespace WatTmdb.V3
                 response.Content = response.Content.Replace("},null,", "},");
             }
 
+            while (response.Content.IndexOf("[null,") != -1)
+            {
+                response.Content = response.Content.Replace("[null,", "[");
+            }
+
             var deserializer = new JsonDeserializer();
             var data = deserializer.Deserialize<T>(response);
 

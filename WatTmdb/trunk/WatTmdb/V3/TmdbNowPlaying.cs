@@ -22,11 +22,6 @@ namespace WatTmdb.V3
         }
     }
 
-    public class TmdbNowPlaying
-    {
-        public int page { get; set; }
-        public List<NowPlaying> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbNowPlaying : TmdbSearchResultBase<NowPlaying>
+    { }
 }

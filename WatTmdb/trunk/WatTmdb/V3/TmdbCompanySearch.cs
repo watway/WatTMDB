@@ -17,11 +17,6 @@ namespace WatTmdb.V3
         }
     }
 
-    public class TmdbCompanySearch
-    {
-        public int page { get; set; }
-        public List<CompanyResult> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbCompanySearch : TmdbSearchResultBase<CompanyResult>
+    { }
 }

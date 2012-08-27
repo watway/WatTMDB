@@ -301,12 +301,17 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="IMDB_ID">IMDB movie id</param>
         /// <returns></returns>
-        public TmdbMovie GetMovieByIMDB(string IMDB_ID)
+        public TmdbMovie GetMovieByIMDB(string IMDB_ID, string language)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
                 throw new ArgumentException("IMDB_ID must be supplied");
 
-            return ProcessRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID));
+            return ProcessRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, language));
+        }
+
+        public TmdbMovie GetMovieByIMDB(string IMDB_ID)
+        {
+            return GetMovieByIMDB(IMDB_ID, Language);
         }
 
         /// <summary>

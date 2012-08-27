@@ -176,9 +176,11 @@ namespace WatTmdb.V3
             return request;
         }
 
-        private static RestRequest BuildGetMovieByIMDBRequest(string IMDB_ID, object userState = null)
+        private static RestRequest BuildGetMovieByIMDBRequest(string IMDB_ID, string language, object userState = null)
         {
             var request = new RestRequest("movie/{id}", Method.GET);
+            if (string.IsNullOrEmpty(language) == false)
+                request.AddParameter("language", language);
             request.AddUrlSegment("id", IMDB_ID.EscapeString());
             if (userState != null)
                 request.UserState = userState;

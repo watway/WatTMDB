@@ -22,11 +22,6 @@ namespace WatTmdb.V3
         }
     }
 
-    public class TmdbSimilarMovies
-    {
-        public int page { get; set; }
-        public List<SimilarMovie> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbSimilarMovies : TmdbSearchResultBase<SimilarMovie>
+    { }
 }

@@ -74,6 +74,7 @@
     <Compile Include="V3\TmdbPersonSearch.cs" />
     <Compile Include="V3\TmdbPopular.cs" />
     <Compile Include="V3\TmdbAsyncResult.cs" />
+    <Compile Include="V3\TmdbSearchResultBase.cs" />
     <Compile Include="V3\TmdbSimilarMovies.cs" />
     <Compile Include="V3\TmdbAuthToken.cs" />
     <Compile Include="V3\TmdbTopRated.cs" />

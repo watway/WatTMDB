@@ -22,11 +22,6 @@ namespace WatTmdb.V3
         }
     }
 
-    public class TmdbPopular
-    {
-        public int page { get; set; }
-        public List<PopularMovie> results { get; set; }
-        public int total_pages { get; set; }
-        public int total_results { get; set; }
-    }
+    public class TmdbPopular : TmdbSearchResultBase<PopularMovie>
+    { }
 }

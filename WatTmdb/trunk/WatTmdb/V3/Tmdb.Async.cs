@@ -330,7 +330,7 @@ namespace WatTmdb.V3
         /// </summary>
         /// <param name="IMDB_ID">IMDB movie id</param>
         /// <param name="callback"></param>
-        public void GetMovieByIMDB(string IMDB_ID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
+        public void GetMovieByIMDB(string IMDB_ID, string language, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
         {
             if (string.IsNullOrEmpty(IMDB_ID))
             {
@@ -343,7 +343,12 @@ namespace WatTmdb.V3
                 return;
             }
 
-            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, UserState), callback);
+            ProcessAsyncRequest<TmdbMovie>(BuildGetMovieByIMDBRequest(IMDB_ID, language, UserState), callback);
+        }
+
+        public void GetMovieByIMDB(string IMDB_ID, object UserState, Action<TmdbAsyncResult<TmdbMovie>> callback)
+        {
+            GetMovieByIMDB(IMDB_ID, Language, UserState, callback);
         }
 
         /// <summary>

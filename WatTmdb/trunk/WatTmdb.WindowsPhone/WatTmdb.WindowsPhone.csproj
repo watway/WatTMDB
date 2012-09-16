@@ -136,6 +136,9 @@
     <Compile Include="..\WatTmdb\V3\TmdbPopular.cs">
       <Link>V3\TmdbPopular.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbSearchResultBase.cs">
+      <Link>V3\TmdbSearchResultBase.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbSimilarMovies.cs">
       <Link>V3\TmdbSimilarMovies.cs</Link>
     </Compile>

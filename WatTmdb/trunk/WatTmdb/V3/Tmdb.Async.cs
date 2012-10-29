@@ -33,7 +33,7 @@ namespace WatTmdb.V3
                     --AsyncCount;
                     var result = new TmdbAsyncResult<T>
                     {
-                        Data = resp.Data,
+                        Data = resp.Data != null ? resp.Data : default(T),
                         UserState = request.UserState
                     };
 

@@ -12,11 +12,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using WatTmdb.WP7Sample.ViewModels;
 
 namespace WatTmdb.WP7Sample
 {
     public partial class App : Application
     {
+        public static string ApiKey = "apikey";
+
+        // cache the model
+        public static MoviesViewModel MoviesViewModel { get; set; }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

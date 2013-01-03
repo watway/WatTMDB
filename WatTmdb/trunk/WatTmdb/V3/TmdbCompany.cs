@@ -19,9 +19,9 @@ namespace WatTmdb.V3
 
     public class TmdbCompany
     {
-        public object description { get; set; }
-        public object headquarters { get; set; }
-        public object homepage { get; set; }
+        public string description { get; set; }
+        public string headquarters { get; set; }
+        public string homepage { get; set; }
         public int id { get; set; }
         public string logo_path { get; set; }
         public string name { get; set; }

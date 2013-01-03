@@ -41,8 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp.WindowsPhone">
-      <HintPath>..\packages\RestSharp.103.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
+    <Reference Include="RestSharp.WindowsPhone, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -52,17 +53,44 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\WatTmdb\Utility.cs">
-      <Link>Utility.cs</Link>
-    </Compile>
-    <Compile Include="..\WatTmdb\V3\Tmdb.Async.cs">
+    <Compile Include="..\WatTmdb\Tmdb\Tmdb.Async.cs">
       <Link>V3\Tmdb.Async.cs</Link>
     </Compile>
-    <Compile Include="..\WatTmdb\V3\Tmdb.cs">
+    <Compile Include="..\WatTmdb\Tmdb\Tmdb.cs">
       <Link>V3\Tmdb.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\Utilities\Constants.cs">
+      <Link>Utilities\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\Utilities\RequestBuilder.cs">
+      <Link>Utilities\RequestBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\Utilities\RequestGenerator.cs">
+      <Link>Utilities\RequestGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\Utilities\Utility.cs">
+      <Link>Utilities\Utility.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\Utilities\WatJsonDeserializer.cs">
+      <Link>Utilities\WatJsonDeserializer.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbAccount.cs">
+      <Link>V3\TmdbAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbAccountMovies.cs">
+      <Link>V3\TmdbAccountMovies.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbAsyncResult.cs">
       <Link>V3\TmdbAsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbAuthSession.cs">
+      <Link>V3\TmdbAuthSession.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbAuthToken.cs">
+      <Link>V3\TmdbAuthToken.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbChanges.cs">
+      <Link>V3\TmdbChanges.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbCollection.cs">
       <Link>V3\TmdbCollection.cs</Link>
@@ -91,8 +119,17 @@
     <Compile Include="..\WatTmdb\V3\TmdbGenreMovies.cs">
       <Link>V3\TmdbGenreMovies.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbGuestSession.cs">
+      <Link>V3\TmdbGuestSession.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbKeywords.cs">
+      <Link>V3\TmdbKeywords.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbLatestMovie.cs">
       <Link>V3\TmdbLatestMovie.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbList.cs">
+      <Link>V3\TmdbList.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovie.cs">
       <Link>V3\TmdbMovie.cs</Link>
@@ -102,6 +139,9 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovieCast.cs">
       <Link>V3\TmdbMovieCast.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieChanges.cs">
+      <Link>V3\TmdbMovieChanges.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovieImages.cs">
       <Link>V3\TmdbMovieImages.cs</Link>
@@ -123,6 +163,9 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbPerson.cs">
       <Link>V3\TmdbPerson.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbPersonChanges.cs">
+      <Link>V3\TmdbPersonChanges.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbPersonCredits.cs">
       <Link>V3\TmdbPersonCredits.cs</Link>
@@ -151,10 +194,10 @@
     <Compile Include="..\WatTmdb\V3\TmdbUpcoming.cs">
       <Link>V3\TmdbUpcoming.cs</Link>
     </Compile>
-    <Compile Include="..\WatTmdb\V3\WatJsonDeserializer.cs">
-      <Link>V3\WatJsonDeserializer.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

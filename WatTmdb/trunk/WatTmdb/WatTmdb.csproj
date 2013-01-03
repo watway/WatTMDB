@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.103.1\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,11 +45,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="V3\Tmdb.Async.cs" />
-    <Compile Include="V3\Tmdb.cs" />
-    <Compile Include="V3\Tmdb.Sync.cs" />
+    <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\RequestBuilder.cs" />
+    <Compile Include="Utilities\RequestGenerator.cs" />
+    <Compile Include="Utilities\Utility.cs" />
+    <Compile Include="Tmdb\Tmdb.Async.cs" />
+    <Compile Include="Tmdb\Tmdb.cs" />
+    <Compile Include="Tmdb\Tmdb.Sync.cs" />
+    <Compile Include="V3\TmdbAccount.cs" />
+    <Compile Include="V3\TmdbKeywords.cs" />
+    <Compile Include="V3\TmdbList.cs" />
+    <Compile Include="V3\TmdbAccountMovies.cs" />
+    <Compile Include="V3\TmdbGuestSession.cs" />
+    <Compile Include="V3\TmdbMovieChanges.cs" />
     <Compile Include="V3\TmdbAuthSession.cs" />
+    <Compile Include="V3\TmdbChanges.cs" />
     <Compile Include="V3\TmdbCollection.cs" />
     <Compile Include="V3\TmdbCollectionImages.cs" />
     <Compile Include="V3\TmdbCompany.cs" />
@@ -69,6 +80,7 @@
     <Compile Include="V3\TmdbMovieTrailers.cs" />
     <Compile Include="V3\TmdbNowPlaying.cs" />
     <Compile Include="V3\TmdbPerson.cs" />
+    <Compile Include="V3\TmdbPersonChanges.cs" />
     <Compile Include="V3\TmdbPersonCredits.cs" />
     <Compile Include="V3\TmdbPersonImages.cs" />
     <Compile Include="V3\TmdbPersonSearch.cs" />
@@ -80,7 +92,10 @@
     <Compile Include="V3\TmdbTopRated.cs" />
     <Compile Include="V3\TmdbTranslations.cs" />
     <Compile Include="V3\TmdbUpcoming.cs" />
-    <Compile Include="V3\WatJsonDeserializer.cs" />
+    <Compile Include="Utilities\WatJsonDeserializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

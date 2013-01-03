@@ -32,4 +32,20 @@ namespace WatTmdb.V3
             return name;
         }
     }
+
+    public class CollectionSearch
+    {
+        public int id { get; set; }
+        public string backdrop_path { get; set; }
+        public string name { get; set; }
+        public string poster_path { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
+    }
+
+    public class TmdbCollectionSearch : TmdbSearchResultBase<CollectionSearch>
+    { }
 }

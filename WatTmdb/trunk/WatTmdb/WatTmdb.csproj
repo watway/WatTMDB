@@ -57,6 +57,7 @@
     <Compile Include="V3\TmdbList.cs" />
     <Compile Include="V3\TmdbAccountMovies.cs" />
     <Compile Include="V3\TmdbGuestSession.cs" />
+    <Compile Include="V3\TmdbMovieBase.cs" />
     <Compile Include="V3\TmdbMovieChanges.cs" />
     <Compile Include="V3\TmdbAuthSession.cs" />
     <Compile Include="V3\TmdbChanges.cs" />

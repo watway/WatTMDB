@@ -137,6 +137,9 @@
     <Compile Include="..\WatTmdb\V3\TmdbMovieAlternateTitles.cs">
       <Link>V3\TmdbMovieAlternateTitles.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieBase.cs">
+      <Link>V3\TmdbMovieBase.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovieCast.cs">
       <Link>V3\TmdbMovieCast.cs</Link>
     </Compile>

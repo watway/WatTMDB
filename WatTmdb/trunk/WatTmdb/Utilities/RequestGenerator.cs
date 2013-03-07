@@ -504,5 +504,17 @@ namespace WatTmdb.Utilities
         }
 
         #endregion
+
+
+        #region Jobs
+
+        internal RestRequest GetJobsList(object userState = null)
+        {
+            return GetBuilder(REQUEST_JOB_LIST)
+                .SetUserState(userState)
+                .GetRequest();
+        }
+
+        #endregion
     }
 }

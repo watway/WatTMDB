@@ -881,5 +881,20 @@ namespace WatTmdb.V3
         }
 
         #endregion
+
+
+        #region Job List methods
+
+        /// <summary>
+        /// Get a list of valid jobs
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fjob%2Flist)
+        /// </summary>
+        /// <returns></returns>
+        public TmdbJobList GetJobList()
+        {
+            return ProcessRequest<TmdbJobList>(Generator.GetJobsList());
+        }
+
+        #endregion
     }
 }

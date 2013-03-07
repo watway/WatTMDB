@@ -1206,5 +1206,21 @@ namespace WatTmdb.V3
         }
 
         #endregion
+
+
+        #region Job List methods
+
+        /// <summary>
+        /// Get a list of valid jobs
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fjob%2Flist)
+        /// </summary>
+        /// <param name="userState"></param>
+        /// <param name="callback"></param>
+        public void GetJobList(object userState, Action<TmdbAsyncResult<TmdbJobList>> callback)
+        {
+            ProcessAsyncRequest<TmdbJobList>(Generator.GetJobsList(userState), callback);
+        }
+
+        #endregion
     }
 }

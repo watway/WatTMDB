@@ -14,6 +14,7 @@ namespace WatTmdb.V3
         public string deathday { get; set; }
         public string homepage { get; set; }
         public int id { get; set; }
+        public string imdb_id { get; set; }
         public string name { get; set; }
         public string place_of_birth { get; set; }
         public string profile_path { get; set; }

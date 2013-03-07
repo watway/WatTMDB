@@ -67,6 +67,8 @@ namespace WatTmdb.Utilities
         public const string REQUEST_CHANGES_MOVIES = "movie/changes";
         public const string REQUEST_CHANGES_PERSON = "person/changes";
 
+        public const string REQUEST_JOB_LIST = "job/list";
+
         #endregion
     
     }

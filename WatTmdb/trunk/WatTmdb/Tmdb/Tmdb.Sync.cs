@@ -344,7 +344,7 @@ namespace WatTmdb.V3
         #region Movie Info
         /// <summary>
         /// Retrieve all the basic movie information for a particular movie by TMDB reference.
-        /// (http://help.themoviedb.org/kb/api/movie-info)
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fmovie%2F%7Bid%7D)
         /// </summary>
         /// <param name="MovieID">TMDB movie id</param>
         /// <param name="language">optional - ISO 639-1 language code</param>
@@ -363,7 +363,7 @@ namespace WatTmdb.V3
 
         /// <summary>
         /// Retrieve all the basic movie information for a particular movie by IMDB reference.
-        /// (http://help.themoviedb.org/kb/api/movie-info)
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fmovie%2F%7Bid%7D)
         /// </summary>
         /// <param name="imdbId">IMDB movie id</param>
         /// <returns></returns>

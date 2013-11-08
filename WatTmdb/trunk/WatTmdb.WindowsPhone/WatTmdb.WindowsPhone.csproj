@@ -160,6 +160,9 @@
     <Compile Include="..\WatTmdb\V3\TmdbMovieReleases.cs">
       <Link>V3\TmdbMovieReleases.cs</Link>
     </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbMovieReview.cs">
+      <Link>V3\TmdbMovieReview.cs</Link>
+    </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbMovieSearch.cs">
       <Link>V3\TmdbMovieSearch.cs</Link>
     </Compile>
@@ -198,6 +201,27 @@
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbTranslations.cs">
       <Link>V3\TmdbTranslations.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTv.cs">
+      <Link>V3\TmdbTv.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvCredits.cs">
+      <Link>V3\TmdbTvCredits.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvEpisode.cs">
+      <Link>V3\TmdbTvEpisode.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvExternal.cs">
+      <Link>V3\TmdbTvExternal.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvImages.cs">
+      <Link>V3\TmdbTvImages.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvSearch.cs">
+      <Link>V3\TmdbTvSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\WatTmdb\V3\TmdbTvSeason.cs">
+      <Link>V3\TmdbTvSeason.cs</Link>
     </Compile>
     <Compile Include="..\WatTmdb\V3\TmdbUpcoming.cs">
       <Link>V3\TmdbUpcoming.cs</Link>

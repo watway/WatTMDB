@@ -9,4 +9,6 @@ namespace WatTmdb.V3
 
     public class TmdbPopular : TmdbSearchResultBase<PopularMovie>
     { }
+
+    public class TmdbPopularPeople : TmdbSearchResultBase<PersonResult> { }
 }

@@ -177,6 +177,16 @@ namespace WatTmdb.Utilities
                 .GetRequest();
         }
 
+        internal RestRequest SearchTV(string query, int page, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_SEARCH_TV)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_QUERY, query)
+                .AddParameter(RequestBuilder.PARAMETER_PAGE, page)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .GetRequest();
+        }
+
         #endregion
 
 
@@ -202,6 +212,119 @@ namespace WatTmdb.Utilities
 
         #endregion
 
+
+        #region TV Info
+        internal RestRequest GetTVInfo(int TvId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVCredits(int TvId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_CREDITS)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVExternal(int TvId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_EXTERNALIDS)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVImages(int TvId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_IMAGES)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVSeason(int TvId, int SeasonId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_SEASON)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVSeasonExternal(int TvId, int SeasonId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_SEASON_EXTERNALIDS)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTVSeasonImages(int TvId, int SeasonId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_SEASON_IMAGES)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTvEpisode(int TvId, int SeasonId, int EpisodeId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_EPISODE)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_EPISODE, EpisodeId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTvEpisodeCredits(int TvId, int SeasonId, int EpisodeId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_EPISODE_CREDITS)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_EPISODE, EpisodeId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTvEpisodeExternal(int TvId, int SeasonId, int EpisodeId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_EPISODE_EXTERNALIDS)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_EPISODE, EpisodeId)
+                .GetRequest();
+        }
+
+        internal RestRequest GetTvEpisodeImages(int TvId, int SeasonId, int EpisodeId, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_TV_EPISODE_IMAGES)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, TvId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_SEASON, SeasonId)
+                .AddUrlSegment(RequestBuilder.PARAMETER_EPISODE, EpisodeId)
+                .GetRequest();
+        }
+
+        #endregion
 
         #region Movie Info
 
@@ -310,6 +433,16 @@ namespace WatTmdb.Utilities
                 .GetRequest();
         }
 
+        internal RestRequest GetMovieReviews(int MovieId, int page, string language, object userState = null)
+        {
+            return GetBuilder(REQUEST_MOVIE_REVIEWS)
+                .SetUserState(userState)
+                .AddUrlSegment(RequestBuilder.PARAMETER_ID, MovieId)
+                .AddParameter(RequestBuilder.PARAMETER_PAGE, page)
+                .AddParameter(RequestBuilder.PARAMETER_LANGUAGE, language)
+                .GetRequest();
+        }
+
         #endregion
 
 
@@ -345,6 +478,21 @@ namespace WatTmdb.Utilities
             return GetBuilder(REQUEST_PERSON_CHANGES)
                 .SetUserState(userState)
                 .AddUrlSegment(RequestBuilder.PARAMETER_ID, PersonID)
+                .GetRequest();
+        }
+
+        internal RestRequest GetPopularPeople(int page, object userState = null)
+        {
+            return GetBuilder(REQUEST_PERSON_POPULAR)
+                .SetUserState(userState)
+                .AddParameter(RequestBuilder.PARAMETER_PAGE, page)
+                .GetRequest();
+        }
+
+        internal RestRequest GetLatestPerson(object userState = null)
+        {
+            return GetBuilder(REQUEST_PERSON_LATEST)
+                .SetUserState(userState)
                 .GetRequest();
         }
 

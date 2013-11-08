@@ -361,6 +361,23 @@ namespace WatTmdb.V3
             ProcessAsyncRequest<TmdbCollectionSearch>(Generator.SearchCollection(query, page, language, UserState), callback);
         }
 
+        /// <summary>
+        /// Search for TV shows by title
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fsearch%2Ftv)
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="page"></param>
+        /// <param name="language"></param>
+        /// <param name="userState"></param>
+        /// <param name="callback"></param>
+        public void SearchTV(string query, int page, string language, object userState, Action<TmdbAsyncResult<TmdbTvSearch>> callback)
+        {
+            if (CheckQuery(query, userState, callback) == false)
+                return;
+
+            ProcessAsyncRequest<TmdbTvSearch>(Generator.SearchTV(query, page, language, userState), callback);
+        }
+
         #endregion
 
 
@@ -755,6 +772,20 @@ namespace WatTmdb.V3
             GetUpcomingMovies(page, Language, UserState, callback);
         }
 
+        /// <summary>
+        /// Get the reviews for a particular movie id
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fmovie%2F%7Bid%7D%2Freviews)
+        /// </summary>
+        /// <param name="MovieId"></param>
+        /// <param name="page"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetMovieReviews(int MovieId, int page, string language, object UserState, Action<TmdbAsyncResult<TmdbMovieReview>> callback)
+        {
+            ProcessAsyncRequest<TmdbMovieReview>(Generator.GetMovieReviews(MovieId, page, language, UserState), callback);
+        }
+
         #endregion
 
 
@@ -849,6 +880,185 @@ namespace WatTmdb.V3
         public void GetPersonChangesETag(int PersonID, object userState, Action<TmdbAsyncETagResult> callback)
         {
             ProcessAsyncRequestETag(ETagGenerator.GetPersonChanges(PersonID, userState), callback);
+        }
+
+        /// <summary>
+        /// Get list of popular people on the Movie Database
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fperson%2Fpopular)
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="userState"></param>
+        /// <param name="callback"></param>
+        public void GetPopularPeople(int page, object userState, Action<TmdbAsyncResult<TmdbPopularPeople>> callback)
+        {
+            ProcessAsyncRequest<TmdbPopularPeople>(Generator.GetPopularPeople(page), callback);
+        }
+
+        /// <summary>
+        /// Get the latest person id
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fperson%2Flatest)
+        /// </summary>
+        /// <param name="userState"></param>
+        /// <param name="callback"></param>
+        public void GetLatestPerson(object userState, Action<TmdbAsyncResult<TmdbPerson>> callback)
+        {
+            ProcessAsyncRequest<TmdbPerson>(Generator.GetLatestPerson(userState), callback);
+        }
+        #endregion
+
+
+        #region TV Info
+        /// <summary>
+        /// Get the primary informaiton about a TV Series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVInfo(int TvId, string language, object UserState, Action<TmdbAsyncResult<TmdbTv>> callback)
+        {
+            ProcessAsyncRequest<TmdbTv>(Generator.GetTVInfo(TvId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the cast & crew information about a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fcredits)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVCredits(int TvId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvCredits>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvCredits>(Generator.GetTVCredits(TvId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the external ids stored for a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fexternal_ids)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVExternal(int TvId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvExternal>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvExternal>(Generator.GetTVExternal(TvId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the images (posters and backdrops) for a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVImages(int TvId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvImages>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvImages>(Generator.GetTVImages(TvId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the primary information about a TV season by its season number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVSeason(int TvId, int SeasonId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvSeason>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvSeason>(Generator.GetTVSeason(TvId, SeasonId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the external ids stored for a TV season
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fexternal_ids)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVSeasonExternal(int TvId, int SeasonId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvSeasonExternal>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvSeasonExternal>(Generator.GetTVSeasonExternal(TvId, SeasonId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the images (posters) stored for a TV season
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVSeasonImages(int TvId, int SeasonId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvSeasonImages>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvSeasonImages>(Generator.GetTVSeasonImages(TvId, SeasonId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the primary information about a TV episode by combination of a season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVEpisode(int TvId, int SeasonId, int EpisodeId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvEpisode>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvEpisode>(Generator.GetTvEpisode(TvId, SeasonId, EpisodeId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the TV episode credits by combination of season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D%2Fcredits)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVEpisodeCredits(int TvId, int SeasonId, int EpisodeId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvCredits>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvCredits>(Generator.GetTvEpisodeCredits(TvId, SeasonId, EpisodeId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the external ids for a TV episode by comabination of a season and episode number
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVEpisodeExternal(int TvId, int SeasonId, int EpisodeId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvExternal>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvExternal>(Generator.GetTvEpisodeExternal(TvId, SeasonId, EpisodeId, language, UserState), callback);
+        }
+
+        /// <summary>
+        /// Get the images (episode stills) for a TV episode by combination of a season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <param name="UserState"></param>
+        /// <param name="callback"></param>
+        public void GetTVEpisodeImages(int TvId, int SeasonId, int EpisodeId, string language, object UserState, Action<TmdbAsyncResult<TmdbTvEpisodeImages>> callback)
+        {
+            ProcessAsyncRequest<TmdbTvEpisodeImages>(Generator.GetTvEpisodeImages(TvId, SeasonId, EpisodeId, language, UserState), callback);
         }
         #endregion
 

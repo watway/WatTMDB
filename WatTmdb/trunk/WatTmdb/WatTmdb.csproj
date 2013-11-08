@@ -33,9 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestSharp, Version=104.3.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\..\WatMedia\packages\RestSharp.104.3.3\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,6 +80,7 @@
     <Compile Include="V3\TmdbMovieImages.cs" />
     <Compile Include="V3\TmdbMovieKeywords.cs" />
     <Compile Include="V3\TmdbMovieReleases.cs" />
+    <Compile Include="V3\TmdbMovieReview.cs" />
     <Compile Include="V3\TmdbMovieSearch.cs" />
     <Compile Include="V3\TmdbMovieTrailers.cs" />
     <Compile Include="V3\TmdbNowPlaying.cs" />
@@ -95,6 +96,13 @@
     <Compile Include="V3\TmdbAuthToken.cs" />
     <Compile Include="V3\TmdbTopRated.cs" />
     <Compile Include="V3\TmdbTranslations.cs" />
+    <Compile Include="V3\TmdbTv.cs" />
+    <Compile Include="V3\TmdbTvCredits.cs" />
+    <Compile Include="V3\TmdbTvEpisode.cs" />
+    <Compile Include="V3\TmdbTvExternal.cs" />
+    <Compile Include="V3\TmdbTvImages.cs" />
+    <Compile Include="V3\TmdbTvSearch.cs" />
+    <Compile Include="V3\TmdbTvSeason.cs" />
     <Compile Include="V3\TmdbUpcoming.cs" />
     <Compile Include="Utilities\WatJsonDeserializer.cs" />
   </ItemGroup>

@@ -26,6 +26,7 @@ namespace WatTmdb.Utilities
         public const string REQUEST_SEARCH_COMPANY = "search/company";
         public const string REQUEST_SEARCH_KEYWORD = "search/keyword";
         public const string REQUEST_SEARCH_COLLECTION = "search/collection";
+        public const string REQUEST_SEARCH_TV = "search/tv";
 
         public const string REQUEST_COLLECTION = "collection/{id}";
         public const string REQUEST_COLLECTION_IMAGES = "collection/{id}/images";
@@ -41,6 +42,7 @@ namespace WatTmdb.Utilities
         public const string REQUEST_MOVIE_TRANSLATIONS = "movie/{id}/translations";
         public const string REQUEST_MOVIE_LISTS = "movie/{id}/lists";
         public const string REQUEST_MOVIE_CHANGES = "movie/{id}/changes";
+        public const string REQUEST_MOVIE_REVIEWS = "movie/{id}/reviews";
 
         public const string REQUEST_MOVIE_LATEST = "movie/latest";
         public const string REQUEST_MOVIE_PLAYING = "movie/now_playing";
@@ -52,6 +54,22 @@ namespace WatTmdb.Utilities
         public const string REQUEST_PERSON_CREDITS = "person/{id}/credits";
         public const string REQUEST_PERSON_IMAGES = "person/{id}/images";
         public const string REQUEST_PERSON_CHANGES = "person/{id}/changes";
+        public const string REQUEST_PERSON_POPULAR = "person/popular";
+        public const string REQUEST_PERSON_LATEST = "person/latest";
+
+        public const string REQUEST_TV = "tv/{id}";
+        public const string REQUEST_TV_CREDITS = "tv/{id}/credits";
+        public const string REQUEST_TV_EXTERNALIDS = "tv/{id}/external_ids";
+        public const string REQUEST_TV_IMAGES = "tv/{id}/images";
+
+        public const string REQUEST_TV_SEASON = "tv/{id}/season/{season}";
+        public const string REQUEST_TV_SEASON_EXTERNALIDS = "tv/{id}/season/{season}/external_ids";
+        public const string REQUEST_TV_SEASON_IMAGES = "tv/{id}/season/{season}/images";
+
+        public const string REQUEST_TV_EPISODE = "tv/{id}/season/{season}/episode/{episode}";
+        public const string REQUEST_TV_EPISODE_CREDITS = "tv/{id}/season/{season}/episode/{episode}/credits";
+        public const string REQUEST_TV_EPISODE_EXTERNALIDS = "tv/{id}/season/{season}/episode/{episode}/external_ids";
+        public const string REQUEST_TV_EPISODE_IMAGES = "tv/{id}/season/{season}/episode/{episode}/images";
 
         public const string REQUEST_LIST = "list/{id}";
 
@@ -90,6 +108,8 @@ namespace WatTmdb.Utilities
         public const string PARAMETER_ENDDATE = "end_date";
         public const string PARAMETER_REQUESTOKEN = "request_token";
         public const string PARAMETER_SESSIONID = "session_id";
+        public const string PARAMETER_SEASON = "season";
+        public const string PARAMETER_EPISODE = "episode";
         #endregion
 
     }

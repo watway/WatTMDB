@@ -296,6 +296,22 @@ namespace WatTmdb.V3
             return ProcessRequest<TmdbCollectionSearch>(Generator.SearchCollection(query, page, language));
         }
 
+        /// <summary>
+        /// Search for TV shows by title
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fsearch%2Ftv)
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="page"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvSearch SearchTV(string query, int page, string language = "")
+        {
+            if (string.IsNullOrEmpty(query))
+                throw new ArgumentException("Value required for query");
+
+            return ProcessRequest<TmdbTvSearch>(Generator.SearchTV(query, page, language));
+        }
+
         #endregion
 
 
@@ -547,6 +563,18 @@ namespace WatTmdb.V3
         {
             return ProcessRequestETag(ETagGenerator.GetMovieChanges(MovieID));
         }
+
+        /// <summary>
+        /// Get the reviews for a particular movie id
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fmovie%2F%7Bid%7D%2Freviews)
+        /// </summary>
+        /// <param name="MovieId">TMDB Movie Id</param>
+        /// <returns></returns>
+        public TmdbMovieReview GetMovieReviews(int MovieId, int page, string language = null)
+        {
+            return ProcessRequest<TmdbMovieReview>(Generator.GetMovieReviews(MovieId, page, language));
+        }
+
         #endregion
 
 
@@ -620,6 +648,172 @@ namespace WatTmdb.V3
         public string GetPersonChangesETag(int PersonID)
         {
             return ProcessRequestETag(ETagGenerator.GetPersonChanges(PersonID));
+        }
+
+        /// <summary>
+        /// Get list of popular people on the Movie Database
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fperson%2Fpopular)
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public TmdbPopularPeople GetPopularPeople(int page)
+        {
+            return ProcessRequest<TmdbPopularPeople>(Generator.GetPopularPeople(page));
+        }
+
+        /// <summary>
+        /// Get the latest person id
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Fperson%2Flatest)
+        /// </summary>
+        /// <returns></returns>
+        public TmdbPerson GetLatestPerson()
+        {
+            return ProcessRequest<TmdbPerson>(Generator.GetLatestPerson());
+        }
+        #endregion
+
+        #region TV Info
+        /// <summary>
+        /// Get the primary informaiton about a TV Series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTv GetTVInfo(int TvId, string language = "")
+        {
+            return ProcessRequest<TmdbTv>(Generator.GetTVInfo(TvId, language));
+        }
+
+        /// <summary>
+        /// Get the cast & crew information about a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fcredits)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvCredits GetTVCredits(int TvId, string language = "")
+        {
+            return ProcessRequest<TmdbTvCredits>(Generator.GetTVCredits(TvId, language));
+        }
+
+        /// <summary>
+        /// Get the external ids stored for a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fexternal_ids)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvExternal GetTVExternal(int TvId, string language = "")
+        {
+            return ProcessRequest<TmdbTvExternal>(Generator.GetTVExternal(TvId, language));
+        }
+
+        /// <summary>
+        /// Get the images (posters and backdrops) for a TV series
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvImages GetTVImages(int TvId, string language = "")
+        {
+            return ProcessRequest<TmdbTvImages>(Generator.GetTVImages(TvId, language));
+        }
+
+        /// <summary>
+        /// Get the primary information about a TV season by its season number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvSeason GetTVSeason(int TvId, int SeasonId, string language = "")
+        {
+            return ProcessRequest<TmdbTvSeason>(Generator.GetTVSeason(TvId, SeasonId, language));
+        }
+
+        /// <summary>
+        /// Get the external ids stored for a TV season
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fexternal_ids)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvSeasonExternal GetTVSeasonExternal(int TvId, int SeasonId, string language = "")
+        {
+            return ProcessRequest<TmdbTvSeasonExternal>(Generator.GetTVSeasonExternal(TvId, SeasonId, language));
+        }
+
+        /// <summary>
+        /// Get the images (posters) stored for a TV season
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvSeasonImages GetTVSeasonImages(int TvId, int SeasonId, string language = "")
+        {
+            return ProcessRequest<TmdbTvSeasonImages>(Generator.GetTVSeasonImages(TvId, SeasonId, language));
+        }
+
+        /// <summary>
+        /// Get the primary information about a TV episode by combination of a season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvEpisode GetTVEpisode(int TvId, int SeasonId, int EpisodeId, string language = "")
+        {
+            return ProcessRequest<TmdbTvEpisode>(Generator.GetTvEpisode(TvId, SeasonId, EpisodeId, language));
+        }
+
+        /// <summary>
+        /// Get the TV episode credits by combination of season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D%2Fcredits)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvCredits GetTVEpisodeCredits(int TvId, int SeasonId, int EpisodeId, string language = "")
+        {
+            return ProcessRequest<TmdbTvCredits>(Generator.GetTvEpisodeCredits(TvId, SeasonId, EpisodeId, language));
+        }
+
+        /// <summary>
+        /// Get the external ids for a TV episode by comabination of a season and episode number
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvExternal GetTVEpisodeExternal(int TvId, int SeasonId, int EpisodeId, string language = "")
+        {
+            return ProcessRequest<TmdbTvExternal>(Generator.GetTvEpisodeExternal(TvId, SeasonId, EpisodeId, language));
+        }
+
+        /// <summary>
+        /// Get the images (episode stills) for a TV episode by combination of a season and episode number.
+        /// (http://docs.themoviedb.apiary.io/#get-%2F3%2Ftv%2F%7Bid%7D%2Fseason%2F%7Bseason_number%7D%2Fepisode%2F%7Bepisode_number%7D%2Fimages)
+        /// </summary>
+        /// <param name="TvId"></param>
+        /// <param name="SeasonId"></param>
+        /// <param name="EpisodeId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public TmdbTvEpisodeImages GetTVEpisodeImages(int TvId, int SeasonId, int EpisodeId, string language = "")
+        {
+            return ProcessRequest<TmdbTvEpisodeImages>(Generator.GetTvEpisodeImages(TvId, SeasonId, EpisodeId, language));
         }
         #endregion
 

@@ -22,7 +22,7 @@ namespace WatTmdb.Sample
                 int page = 1;
                 while (true)
                 {
-                    var result = api.SearchMovie(search, page);
+                    var result = api.SearchMovie(search, page++);
                     if (result != null)
                     {
                         if (page == 1)

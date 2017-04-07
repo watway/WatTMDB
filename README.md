@@ -1,10 +1,17 @@
 # WatTMDB
 .NET Library for use with Version 3 API available from The Movie Db
 
+Website: http://www.themoviedb.org
+API: http://docs.themoviedb.apiary.io
+
+**Note: you will need to request an API key from TMDb to be able to use this library.**  Instructions to obtain an API key can be found [here](http://help.themoviedb.org/kb/general/how-do-i-register-for-an-api-key).
+
+The library takes advantage of [RestSharp](http://restsharp.org/) to simplify the requests and JSON responses.
+
 ## Using the Library
 Add a reference to WatTmdb.dll to your project.
 
-The main api class is _Tmdb_ in the _WatTmdb.V3_ namespace.  The constructer takes your API key, and also an option language string, for example "*en*", or you can pass *null*.  Instructions to obtain an API key can be found [here](http://help.themoviedb.org/kb/general/how-do-i-register-for-an-api-key).
+The main api class is _Tmdb_ in the _WatTmdb.V3_ namespace.  The constructer takes your API key, and also an option language string, for example "*en*", or you can pass *null*.
 
 ```
 WatTmdb.V3.Tmdb api = new Tmdb("apikey", "en");

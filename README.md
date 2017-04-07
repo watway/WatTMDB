@@ -1,6 +1,8 @@
 # WatTMDB
 .NET Library for use with Version 3 API available from The Movie Db
 
+Migrated from https://wattmdb.codeplex.com/
+
 Website: http://www.themoviedb.org
 API: http://docs.themoviedb.apiary.io
 
